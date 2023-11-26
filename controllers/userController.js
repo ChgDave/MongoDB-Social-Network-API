@@ -24,7 +24,7 @@ const { User, Thought } = require("../models");
 //   ]);
 
 module.exports = {
-  // Get all students
+  // Get all users
   async getUsers(req, res) {
     try {
       const users = await User.find();
