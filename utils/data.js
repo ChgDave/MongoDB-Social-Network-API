@@ -10,9 +10,11 @@ const thoughts = [
   {
     thoughtText: "Today is a great day",
     username: "chgdave",
+    // createdAt: Date.now(),
     reactions: {
       reactionBody: "I agree",
       username: "dpk",
+      // createdAt: Date.now(),
     },
   },
 ];
