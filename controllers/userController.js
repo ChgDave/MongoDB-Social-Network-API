@@ -36,47 +36,46 @@ module.exports = {
     }
   },
 
-  // Get a single student
-  // async getSingleStudent(req, res) {
-  //   try {
-  //     const student = await Student.findOne({
-  //       _id: req.params.studentId,
-  //     }).select("-__v");
+  // Get a single user
+  async getSingleUser(req, res) {
+    try {
+      const user = await User.findOne({
+        _id: req.params.userId,
+      }).select("-__v");
 
-  //     if (!student) {
-  //       return res.status(404).json({ message: "No student with that ID" });
+      if (!user) {
+        return res.status(404).json({ message: "No user with that ID" });
+      }
+
+      res.json(user);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  },
+
+  // create a new user
+  async createUser(req, res) {
+    try {
+      const user = await User.create(req.body);
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  // Delete a user and all his thoughts and reactions
+  // async deleteUser(req, res) {
+  //   try {
+  //     const user = await User.findOneAndRemove({
+  //       _id: req.params.userId,
+  //     });
+
+  //     if (!user) {
+  //       return res.status(404).json({ message: "No such user exists" });
   //     }
 
-  //     res.json({
-  //       student,
-  //       grade: await grade(req.params.studentId),
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //     return res.status(500).json(err);
-  //   }
-  // },
-  // // create a new student
-  // async createStudent(req, res) {
-  //   try {
-  //     const student = await Student.create(req.body);
-  //     res.json(student);
-  //   } catch (err) {
-  //     res.status(500).json(err);
-  //   }
-  // },
-  // // Delete a student and remove them from the course
-  // async deleteStudent(req, res) {
-  //   try {
-  //     const student = await Student.findOneAndRemove({
-  //       _id: req.params.studentId,
-  //     });
-
-  //     if (!student) {
-  //       return res.status(404).json({ message: "No such student exists" });
-  //     }
-
-  //     const course = await Course.findOneAndUpdate(
+  //     const thoughts = await Course.findOneAndUpdate(
   //       { students: req.params.studentId },
   //       { $pull: { students: req.params.studentId } },
   //       { new: true }
