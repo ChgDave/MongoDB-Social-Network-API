@@ -64,6 +64,20 @@ module.exports = {
     }
   },
 
+  // update a new user
+  async updateUser(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      );
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
   // Delete a user and all his thoughts and reactions
   // async deleteUser(req, res) {
   //   try {
@@ -145,24 +159,4 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // // Remove assignment from a student
-  // async removeAssignment(req, res) {
-  //   try {
-  //     const student = await Student.findOneAndUpdate(
-  //       { _id: req.params.studentId },
-  //       { $pull: { assignment: { assignmentId: req.params.assignmentId } } },
-  //       { runValidators: true, new: true }
-  //     );
-
-  //     if (!student) {
-  //       return res
-  //         .status(404)
-  //         .json({ message: "No student found with that ID :(" });
-  //     }
-
-  //     res.json(student);
-  //   } catch (err) {
-  //     res.status(500).json(err);
-  //   }
-  // },
 };
