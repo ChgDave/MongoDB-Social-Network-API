@@ -94,29 +94,32 @@ module.exports = {
   //   }
   // },
 
-  // // Add an assignment to a student
-  // async addAssignment(req, res) {
-  //   console.log("You are adding an assignment");
-  //   console.log(req.body);
+  // Add friend to a user
+  async createFriend(req, res) {
+    console.log("You are creating a friend");
+    console.log(req.body);
 
-  //   try {
-  //     const student = await Student.findOneAndUpdate(
-  //       { _id: req.params.studentId },
-  //       { $addToSet: { assignments: req.body } },
-  //       { runValidators: true, new: true }
-  //     );
+    try {
+      const friend = await User.findOne({ username: req.body.username });
+      console.log(friend);
 
-  //     if (!student) {
-  //       return res
-  //         .status(404)
-  //         .json({ message: "No student found with that ID :(" });
-  //     }
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { friends: friend._id } },
+        { runValidators: true, new: true }
+      );
 
-  //     res.json(student);
-  //   } catch (err) {
-  //     res.status(500).json(err);
-  //   }
-  // },
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: "No user found with that ID :(" });
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
   // // Remove assignment from a student
   // async removeAssignment(req, res) {
   //   try {
