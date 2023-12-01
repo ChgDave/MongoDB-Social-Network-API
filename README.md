@@ -69,7 +69,7 @@ https://github.com/ChgDave/MongoDB-Social-Network-API
 
 ## Video Link
 
-https://drive.google.com/file/d/1jw5hV5h04CWkggLXyZVgx_29VEPrOzqg/view
+https://drive.google.com/file/d/1oZe_jmlvfWzazsriNu0CzffkVtmmfeC1/view
 
 ## Questions
 
