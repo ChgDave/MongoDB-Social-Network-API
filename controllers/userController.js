@@ -109,8 +109,8 @@ module.exports = {
     console.log(req.body);
 
     try {
-      const friend = await User.findOne({ username: req.body.username });
-      console.log(friend);
+      // const friend = await User.findOne({ username: req.body.username });
+      // console.log(friend);
 
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
@@ -135,7 +135,7 @@ module.exports = {
     console.log("You are deleting a friend");
 
     try {
-      const friend = req.body.friendId;
+      const friend = req.params.friendId;
 
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
